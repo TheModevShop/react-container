@@ -85,7 +85,7 @@ var Container = React.createClass({
                      	onScroll={this.onScroll}
                       options={this.props.options}
                      	onScrollEnd={this.onScrollEnd}
-                     	onScrollStart={this.onScrollEnd}>
+                     	onScrollStart={this.onScrollStart}>
            {this.props.children}
         </ReactIScroll> : this.props.children
 			 }
