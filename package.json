@@ -14,7 +14,10 @@
   },
   "dependencies": {
     "blacklist": "^1.1.2",
-    "classnames": "^2.1.2"
+    "classnames": "^2.1.2",
+    "iscroll": "^5.1.3",
+    "react": "^0.13.3",
+    "react-iscroll": "^0.1.2"
   },
   "devDependencies": {
     "babel-eslint": "^3.1.14",

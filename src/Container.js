@@ -1,6 +1,8 @@
 var blacklist = require('blacklist');
 var classnames = require('classnames');
 var React = require('react');
+var ReactIScroll = require('react-iscroll');
+var iScroll = require('iscroll/build/iscroll-probe')
 
 function hasChildrenWithVerticalFill(children) {
 	var result = false;
@@ -71,16 +73,39 @@ var Container = React.createClass({
 			'Container--justify-start': this.props.justify === 'start',
 			'Container--justify-end': this.props.justify === 'end',
 			'Container--justified': this.props.justify === true,
-			'Container--scrollable': this.props.scrollable
+			'Container--scrollable': this.props.scrollable && !this.props.iScroll
 		});
 
 		var props = blacklist(this.props, 'className', 'direction', 'fill', 'justify', 'scrollable');
-
 		return (
 			<div className={className} {...props}>
-				{this.props.children}
+			 {
+			 	this.props.scrollable && this.props.iScroll ?
+			 	<ReactIScroll iscroll={iScroll}
+                     	onScroll={this.onScroll}
+                      options={this.props.options}
+                     	onScrollEnd={this.onScrollEnd}
+                     	onScrollStart={this.onScrollEnd}>
+           {this.props.children}
+        </ReactIScroll> : this.props.children
+			 }
 			</div>
 		);
+	},
+	onScrollStart(e) {
+		if (this.props.onScrollStart) {
+			this.props.onScrollStart(e);
+		}
+	},
+	onScroll(e) {
+		if (this.props.onScroll) {
+			this.props.onScroll(e);
+		}
+	},
+	onScrollEnd(e) {
+		if (this.props.onScrollEnd) {
+			this.props.onScrollEnd(e);
+		}
 	}
 });
 
@@ -97,6 +122,7 @@ function initScrollable(defaultPos) {
 			return { left: pos.left, top: pos.top };
 		},
 		mount (element) {
+			console.log(element)
 			var node = React.findDOMNode(element);
 			node.scrollLeft = pos.left;
 			node.scrollTop = pos.top;
