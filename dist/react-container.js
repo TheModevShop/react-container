@@ -2515,7 +2515,12 @@ var Container = React.createClass({
 		direction: React.PropTypes.oneOf(['column', 'row']),
 		fill: React.PropTypes.bool,
 		grow: React.PropTypes.bool,
+		iScroll: React.PropTypes.bool,
 		justify: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.oneOf(['end', 'center', 'start'])]),
+		options: React.PropTypes.object,
+		onScroll: React.PropTypes.func,
+		onScrollEnd: React.PropTypes.func,
+		onScrollStart: React.PropTypes.func,
 		scrollable: React.PropTypes.oneOfType([React.PropTypes.bool, React.PropTypes.object])
 	},
 	componentDidMount: function componentDidMount() {
@@ -2583,7 +2588,7 @@ var Container = React.createClass({
 		}
 	},
 	onScroll: function onScroll(e) {
-		React.findDOMNode(this.refs.scrollC).scrollTop = e.y;
+		React.findDOMNode(this.refs.scrollTop).scrollTop = e.y * -1;
 		if (this.props.onScroll) {
 			this.props.onScroll(e);
 		}
