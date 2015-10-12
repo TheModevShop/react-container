@@ -104,7 +104,7 @@ var Container = React.createClass({
 		}
 	},
 	onScroll(e) {
-		React.findDOMNode(this.refs.scrollTop).scrollTop = e.y * -1;
+		React.findDOMNode(this.refs.scrollTop).syntheticScrollTop = e.y * -1;
 		if (this.props.onScroll) {
 			this.props.onScroll(e);
 		}
