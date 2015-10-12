@@ -2569,9 +2569,10 @@ var Container = React.createClass({
 				ReactIScroll,
 				{ iscroll: iScroll,
 					onScroll: this.onScroll,
+					ref: 'scrollTop',
 					options: this.props.options,
 					onScrollEnd: this.onScrollEnd,
-					onScrollStart: this.onScrollEnd },
+					onScrollStart: this.onScrollStart },
 				this.props.children
 			) : this.props.children
 		);
@@ -2582,6 +2583,7 @@ var Container = React.createClass({
 		}
 	},
 	onScroll: function onScroll(e) {
+		React.findDOMNode(this.refs.scrollC).scrollTop = e.y;
 		if (this.props.onScroll) {
 			this.props.onScroll(e);
 		}
@@ -2606,7 +2608,6 @@ function initScrollable(defaultPos) {
 			return { left: pos.left, top: pos.top };
 		},
 		mount: function mount(element) {
-			console.log(element);
 			var node = React.findDOMNode(element);
 			node.scrollLeft = pos.left;
 			node.scrollTop = pos.top;
